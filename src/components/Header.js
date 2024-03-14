@@ -43,7 +43,7 @@ const Header = () => {
     };
   }, []);
   return (
-    <div className=" fixed bg-black bg-opacity-95 bg-gradient-to-b from-black z-10 w-full flex justify-between items-center pr-2">
+    <div className=" fixed bg-black bg-opacity-95 bg-gradient-to-b from-black z-20 w-full flex justify-between items-center pr-2">
       <img className="w-56 ml-7" src={LOGO} alt="logo" />
       {user && (
         <div className="flex gap-2 items-center mr-4">
