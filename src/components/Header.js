@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO, USER_AVATAR } from "../utils/constants";
+import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from "../utils/constants";
+import { toggleGPTSearchView } from "../utils/gptSlice";
+import { changePageLanguage } from "../utils/languageSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -20,6 +23,7 @@ const Header = () => {
         navigate("/error");
       });
   };
+
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -42,11 +46,40 @@ const Header = () => {
       unsubscribe();
     };
   }, []);
+  const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
+  const handleGPTSearchClick = () => {
+    dispatch(toggleGPTSearchView());
+  };
+  const handleSelectLanguage = (e) => {
+    console.log(e.target.value);
+    dispatch(changePageLanguage(e.target.value));
+  };
+
   return (
-    <div className=" fixed bg-black bg-opacity-95 bg-gradient-to-b from-black z-20 w-full flex justify-between items-center pr-2">
+    <div className=" fixed bg-black bg-opacity-95 bg-gradient-to-b from-black z-20 w-full flex justify-between items-center pr-2 ">
       <img className="w-56 ml-7" src={LOGO} alt="logo" />
       {user && (
         <div className="flex gap-2 items-center mr-4">
+          {showGPTSearch && (
+            <select
+              onChange={(e) => handleSelectLanguage(e)}
+              className="px-3 py-1 bg-black text-white border border-white rounded-sm"
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => {
+                return (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                );
+              })}
+            </select>
+          )}
+          <button
+            className="text-white bg-purple-700 px-4 py-2 rounded-xl hover:bg-purple-500 mx-4 "
+            onClick={handleGPTSearchClick}
+          >
+            {!showGPTSearch ? "Try GPT Search" : "Back to home"}
+          </button>
           <img alt="user-icon" src={USER_AVATAR} />
           <button
             onClick={handleSignOut}
