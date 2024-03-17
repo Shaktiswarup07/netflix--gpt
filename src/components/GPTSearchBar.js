@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
-import openai from "../utils/openai";
-import {
-  API_OPTIONS,
-  GEMINI_API_KEY,
-  OPENAI_GPT_KEY,
-} from "../utils/constants";
+import { API_OPTIONS, GEMINI_API_KEY } from "../utils/constants";
 import { addGPTMovieResult } from "../utils/gptSlice";
-import axios from "axios";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const GPTSearchBar = () => {
@@ -16,7 +10,7 @@ const GPTSearchBar = () => {
   const [searchText, setSearchText] = useState("");
   console.log(searchText);
   console.log(GEMINI_API_KEY);
-  console.log(OPENAI_GPT_KEY);
+  // console.log(OPENAI_GPT_KEY);
   const language = useSelector((store) => store.lang.language);
   const genAI = new GoogleGenerativeAI(
     "AIzaSyCMyTlnq_21bhRijbxIyM7msEKTCcerg28"
@@ -64,7 +58,7 @@ const GPTSearchBar = () => {
     );
   };
   return (
-    <div className="pt-[10%] w-1/2 mx-auto  ">
+    <div className="pt-[45%] md:pt-[10%] w-full md:w-1/2 mx-auto  ">
       <form
         className="text-center  grid grid-cols-12"
         onSubmit={(e) => e.preventDefault()}
@@ -73,11 +67,11 @@ const GPTSearchBar = () => {
           type="text"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="p-4 m-4 w-full col-span-8 rounded-lg"
+          className="p-4 m-4 w-full col-span-7 rounded-lg"
           placeholder={lang[language].gptSearchPlaceholder}
         />
         <button
-          className="py-2 px-4 mx-8 my-4 bg-red-700 text-white rounded-lg col-span-4"
+          className="py-2 px-2 mx-8 my-4 bg-red-700 text-white rounded-lg col-span-5"
           onClick={handleGPTSearchClick}
         >
           {lang[language].search}

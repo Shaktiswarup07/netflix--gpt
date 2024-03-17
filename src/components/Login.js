@@ -97,10 +97,14 @@ const Login = () => {
     <div>
       <Header />
       <div>
-        <img className="absolute bg-repeat" src={BG_URL} alt="n-logo" />
+        <img
+          className="absolute bg-repeat h-screen object-cover md:w-screen"
+          src={BG_URL}
+          alt="n-logo"
+        />
       </div>
-      <form className=" py-10 absolute w-1/3 top-1/4 left-1/3 bg-opacity-70 bg-black">
-        <h1 className="font-semibold text-white text-3xl mt-4 mb-8 w-3/4 mx-auto">
+      <form className=" py-10 absolute w-full top-20 left-0 md:w-1/3 md:top-1/4 md:left-1/3 bg-opacity-70 bg-black">
+        <h1 className="font-semibold text-white text-2xl md:text-3xl mt-4 mb-8 w-3/4 mx-auto">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         <div>
