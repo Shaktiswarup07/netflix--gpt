@@ -97,7 +97,7 @@ const Login = () => {
     <div>
       <Header />
       <div>
-        <img className="absolute" src={BG_URL} alt="n-logo" />
+        <img className="absolute bg-repeat" src={BG_URL} alt="n-logo" />
       </div>
       <form className=" py-10 absolute w-1/3 top-1/4 left-1/3 bg-opacity-70 bg-black">
         <h1 className="font-semibold text-white text-3xl mt-4 mb-8 w-3/4 mx-auto">
